@@ -60,3 +60,13 @@ class Account(AbstractBaseUser):
 	def has_module_perms(self, app_label):
 		return True
 
+account_choices = (
+    ('savings', 'SAVINGS'),
+    ('curreent', 'CURRENT'),
+)
+
+class AccountDetails(models.Model):
+    account_number              = models.IntegerField()
+    balance                     = models.IntegerField()
+    account_type                = models.CharField(max_length = 8, choices = account_choices, default = 'savings')
+    user_name                   = models.CharField(max_length =  50)
