@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% include 'customer/messages.html' %}
+{% block content %}
+<style>
+  body {
+    background-color: #281459;
+    color: #fff;
+  }
+
+  .h3 {
+    margin-top: 3em;
+    color: #fff;
+  }
+
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+</style>
+<div class="container">
+  <div class="text-center">
+    
+    <form class="form-signin" method="POST">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">Withraw Money</h1>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      <label for="inputAccount" class="sr-only">Account Number</label>
+
+      
+      <label for="inputUsername" class="sr-only">Type your username</label>
+      <input type="text" id="inputUsername" name="withdraw_username" class="form-control" placeholder="Username" required>
+      <label for="inputAmount" class="sr-only">Amount</label>
+      <input type="number" id="inputAmount" name="withdraw_amount" class="form-control" placeholder="Amount" required>
+      <label for="inputAccount" class="sr-only">Account Number</label>
+      <input type="number" id="inputAccount" name="withdraw_account" class="form-control" placeholder="Account Number"
+        required>
+      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Withdraw</button>
+
+    </form>
+   
+  </div>
+</div>
+
+
+{% endblock content %}

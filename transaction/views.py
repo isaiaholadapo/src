@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 import  random
+from django.contrib import  messages
 
-from transaction.models import Deposit, AccountDetails
-from transaction.forms import DepositForm
+from transaction.models import Deposit, AccountDetails, Withdraw
+from transaction.forms import DepositForm, WithdrawForm
 from transaction import  forms
 from . import models
 
@@ -48,7 +49,37 @@ def deposit_view(request):
                 #temp.delete()
 
                 return redirect('home')
+        else:
+            form = forms.DepositForm()
     else:
         return redirect('login')
 
     return render(request, 'transaction/deposit.html', context)
+
+def withdraw_view(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == "POST":
+            form = forms.WithdrawForm(request.POST)
+            if form.is_valid():
+                form.save()
+                withdrawal_user = models.Withdraw.objects.filter(withdraw_username = request.user).last()
+                withdrawal_account = withdrawal_user.withdraw_account
+                withdrawal_amount = withdrawal_user.withdraw_amount
+                temp = withdrawal_user
+                withdrawal_user = models.AccountDetails.objects.get(user_name = request.user)
+                wbal = withdrawal_user.balance
+                if wbal > withdrawal_amount:
+                    withdrawal_user.balance = withdrawal_user.balance - withdrawal_amount
+                    withdrawal_user.save()
+                    return redirect('home')
+                else:
+                    temp.delete()
+                    messages.error(request, "You don't have enough Money.")
+                    return redirect('withdraw')
+            else:
+                form = forms.WithdrawForm()
+    else:
+        return redirect('login')
+    
+    return render(request, 'transaction/withdraw.html')

@@ -8,3 +8,8 @@ class DepositForm(forms.ModelForm):
         model = models.Deposit
         fields = [ 'amount', 'dep_user_name', 'dep_account']
 
+class WithdrawForm(forms.ModelForm):
+    class Meta:
+        model = models.Withdraw
+        fields = ['withdraw_amount', 'withdraw_account', 'withdraw_username']
+
