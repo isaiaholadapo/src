@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-
-
-
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
 		if not email:
@@ -50,7 +47,7 @@ class Account(AbstractBaseUser):
 	objects = MyAccountManager()
 
 	def __str__(self):
-		return self.email
+		return self.username
 
 	# For checking permissions. to keep it simple all admin have ALL permissons
 	def has_perm(self, perm, obj=None):
@@ -60,13 +57,3 @@ class Account(AbstractBaseUser):
 	def has_module_perms(self, app_label):
 		return True
 
-account_choices = (
-    ('savings', 'SAVINGS'),
-    ('curreent', 'CURRENT'),
-)
-
-class AccountDetails(models.Model):
-    account_number              = models.IntegerField()
-    balance                     = models.IntegerField()
-    account_type                = models.CharField(max_length = 8, choices = account_choices, default = 'savings')
-    user_name                   = models.CharField(max_length =  50)

@@ -18,16 +18,21 @@ from django.urls import path
 from django.contrib import admin
 
 from account.views import (
-    home_view,
+    
     registration_view,
     login_view,
     logout_view,
 )
 
+from transaction.views import (
+    home_view,
+    deposit_view
+)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('', home_view, name = 'home'),
+    path('account-details/', home_view, name = 'home'),
     path('register/', registration_view, name = 'register'),
     path('login/', login_view, name = 'login'),
-    path('logout/',  logout_view, name = 'logout')
+    path('logout/',  logout_view, name = 'logout'),
+    path('deposit/',  deposit_view, name = 'deposit'),
 ]

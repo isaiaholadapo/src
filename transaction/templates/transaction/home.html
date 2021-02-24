@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+   body {
+    background-color: #281459 !important;
+    color: #fff;
+  }
+
+  a.nav-link {
+    color: black;
+}
+
+  .h33 {
+    margin-top: 5em;
+    color: #fff;
+  }
+</style>
+<div class="container h33">
+  <h4>Account Details:</h4>
+  <dl class="row">
+    
+    <dt class="col-sm-3">Account Number:</dt>
+    <dd class="col-sm-9">{{ active_user.account_number}}</dd>
+
+    <dt class="col-sm-3">Account Type:</dt>
+    <dd class="col-sm-9">{{ active_user.account_type}}</dd>
+
+    <dt class="col-sm-3">Account Balance:</dt>
+    <dd class="col-sm-9">{{ active_user.balance}}</dd>
+
+    <dt class="col-sm-3">Account Balance:</dt>
+    <dd class="col-sm-9">{{ request.user}}</dd>
+
+  </dl>
+</div>
+
+{% endblock content %}
