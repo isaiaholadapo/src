@@ -13,3 +13,8 @@ class WithdrawForm(forms.ModelForm):
         model = models.Withdraw
         fields = ['withdraw_amount', 'withdraw_account', 'withdraw_username']
 
+class TransferForm(forms.ModelForm):
+    class Meta: 
+        model = models.Transfer
+        fields = ['sender_username', 'amount', 'receiver_account']
+

@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 import  random
 from django.contrib import  messages
 
-from transaction.models import Deposit, AccountDetails, Withdraw
-from transaction.forms import DepositForm, WithdrawForm
+from transaction.models import Deposit, AccountDetails, Withdraw, Transfer
+from transaction.forms import DepositForm, WithdrawForm, TransferForm
 from transaction import  forms
 from . import models
 
@@ -69,7 +69,15 @@ def withdraw_view(request):
                 temp = withdrawal_user
                 withdrawal_user = models.AccountDetails.objects.get(user_name = request.user)
                 wbal = withdrawal_user.balance
-                if wbal > withdrawal_amount:
+                if withdrawal_amount < 5000:
+                    temp.delete()
+                    messages.error(request, "You can't withdraw amount less than 5,000")
+                    return redirect('withdraw')
+                elif withdrawal_amount > 50000:
+                    temp.delete()
+                    messages.error(request, "You can't withdraw amount more than 50,000")
+                    return redirect('withdraw')
+                elif wbal > withdrawal_amount:
                     withdrawal_user.balance = withdrawal_user.balance - withdrawal_amount
                     withdrawal_user.save()
                     return redirect('home')
@@ -82,4 +90,36 @@ def withdraw_view(request):
     else:
         return redirect('login')
     
-    return render(request, 'transaction/withdraw.html')
+    return render(request, 'transaction/withdraw.html', {})
+
+def transfer_view(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == "POST":
+            form = forms.TransferForm(request.POST)
+            if form.is_valid():
+                form.save()
+                sender = models.Transfer.objects.filter(sender_username = request.user).last()
+                receiver_account_no = sender.receiver_account
+                transfer_amount = sender.amount
+                temp = sender
+
+                receiver_account = models.AccountDetails.objects.get(account_number = receiver_account_no)
+                sender = models.AccountDetails.objects.get(user_name = request.user)
+                if sender.balance > transfer_amount:
+                    sender.balance = sender.balance - transfer_amount
+                    receiver_account.balance = receiver_account.balance + transfer_amount
+
+                    sender.save()
+                    receiver_account.save()
+                    return redirect('home')
+                else:
+                    temp.delete()
+                    
+                    messages.error(request, "You don't have enough Money.")
+                    return redirect('transfer')                    
+        else:
+            form = forms.TransferForm()
+    else:
+        return redirect('login')
+    return render(request, 'transaction/transfer.html', {"form": form})

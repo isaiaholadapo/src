@@ -27,7 +27,8 @@ from account.views import (
 from transaction.views import (
     home_view,
     deposit_view,
-    withdraw_view
+    withdraw_view, 
+    transfer_view,
 )
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -37,4 +38,5 @@ urlpatterns = [
     path('logout/',  logout_view, name = 'logout'),
     path('deposit/',  deposit_view, name = 'deposit'),
     path('withdraw/',  withdraw_view, name = 'withdraw'),
+    path('transfer/',  transfer_view, name = 'transfer'),
 ]
