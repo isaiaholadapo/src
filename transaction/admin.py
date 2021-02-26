@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from transaction.models import Deposit, AccountDetails, Withdraw, Transfer
+from transaction.models import Deposit, AccountDetail, Withdraw, Transfer
 # Register your models here.
 
 class DepositAdmin(admin.ModelAdmin):
@@ -12,7 +12,10 @@ class WithdrawAdmin(admin.ModelAdmin):
 class TransferAdmin(admin.ModelAdmin):
     list_display = ['sender_username', 'receiver_account', 'amount', 'date',]
 
+class InterestAdmin(admin.ModelAdmin):
+    list_display = ['username', 'interest', 'date',]
+
 admin.site.register(Deposit, DepositAdmin)
 admin.site.register(Withdraw, WithdrawAdmin)
 admin.site.register(Transfer, TransferAdmin)
-admin.site.register(AccountDetails)
+admin.site.register(AccountDetail)

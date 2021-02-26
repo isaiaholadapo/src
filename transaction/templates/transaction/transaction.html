@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body {
+        background-color: #281459 !important;
+        color: #fff;
+    }
+
+    a.nav-link {
+        color: black;
+    }
+
+    .h33 {
+        margin-top: 5em;
+        color: #fff;
+    }
+
+    td,
+    th {
+        color: #fff;
+    }
+</style>
+<div class="container h33">
+    <h4>Account Details:</h4>
+
+    <ul class="nav nav-pills nav-fill">
+        <li class="active"><a data-toggle="pill" href="#home">Deposit</a></li>
+        <li><a data-toggle="pill" href="#menu1">Withdrawal</a></li>
+        <li><a data-toggle="pill" href="#menu2">Transfer</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+        </div>
+    </div>
+
+    {{si}}
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <h3>HOME</h3>
+        <p>From:</p>
+        <input type="date" name="fromdate" id="">
+        <p>To:</p>
+        <input type="date" name="todate" id="">
+        <input type="submit" value="Submit">
+        <p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dep in sdata %}
+                <tr>
+                    <td scope="row"> {{dep.id}}</th>
+                    <td>{{dep.amount}}</td>
+                    <td>{{dep.date}}</td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        </p>
+    </form>
+    
+</div>
+
+{% endblock content %}

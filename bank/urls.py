@@ -29,6 +29,8 @@ from transaction.views import (
     deposit_view,
     withdraw_view, 
     transfer_view,
+    transaction_view,
+    
 )
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -39,4 +41,7 @@ urlpatterns = [
     path('deposit/',  deposit_view, name = 'deposit'),
     path('withdraw/',  withdraw_view, name = 'withdraw'),
     path('transfer/',  transfer_view, name = 'transfer'),
+    path('transaction/',  transaction_view, name = 'transaction'),
+    
+
 ]
