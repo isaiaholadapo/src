@@ -42,4 +42,10 @@ class Transfer(models.Model):
 	def __str__(self):
 		return self.sender_username
 
+class Interest(models.Model):
+	today_interest				= models.IntegerField()
+	interest_username			= models.IntegerField()
+	interest_account			= models.IntegerField()
+	date 						= models.DateTimeField(auto_now_add=True, blank = True)
+
 

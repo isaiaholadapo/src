@@ -138,3 +138,13 @@ def transaction_view(request):
     transfer = models.Transfer.objects.all()
     context = {"depositi": deposit, "withdraw": withdraw, "transfer": transfer}
     return render(request, 'transaction/transaction.html', context = context )
+
+def interest_view(self):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('login')
+    int_user = models.AccountDetail.objects.get(user_name = request.user)
+    int_user.balance = int_user.balance * (1/ 0.01)
+    int_user.save()
+    return render(request, 'transaction/interest.html', {"int_user": int_user})
+    
