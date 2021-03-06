@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 import  random
 from django.contrib import  messages
 from datetime import datetime
-
+from django.core.paginator import Paginator
 
 from transaction.models import Deposit, AccountDetail, Withdraw, Transfer
 from transaction.forms import DepositForm, WithdrawForm, TransferForm
@@ -133,10 +133,21 @@ def transaction_view(request):
     user = request.user
     if not user.is_authenticated:
         return redirect('login')
-    deposit = models.Deposit.objects.all()
+    deposit = models.Deposit.objects.all().order_by('date').reverse()
     withdraw = models.Withdraw.objects.all()
     transfer = models.Transfer.objects.all()
-    context = {"depositi": deposit, "withdraw": withdraw, "transfer": transfer}
+
+    deposit_paginator = Paginator(deposit, 5)
+    page_num = request.GET.get('page')
+    page = deposit_paginator.get_page(page_num)
+    context = {
+        "depositi": deposit, 
+        "withdraw": withdraw, 
+        "transfer": transfer,
+        "page": page,
+        "count": deposit_paginator.count,
+        
+    }
     return render(request, 'transaction/transaction.html', context = context )
 
 def interest_view(self):

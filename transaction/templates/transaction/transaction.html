@@ -18,66 +18,106 @@
     td,
     th {
         color: #fff;
+        text-align: center;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
     }
 </style>
 <div class="container h33">
     <h4>Account Details:</h4>
 
     <ul class="nav nav-pills nav-fill">
-        <li class="active"><a data-toggle="pill" href="#home">Deposit</a></li>
-        <li><a data-toggle="pill" href="#menu1">Withdrawal</a></li>
-        <li><a data-toggle="pill" href="#menu2">Transfer</a></li>
+        <li class="active"><a data-toggle="pill" href="#deposit-trans">Deposit</a></li>
+        <li><a data-toggle="pill" href="#withdraw-trans">Withdrawal</a></li>
+        <li><a data-toggle="pill" href="#transfer-trans">Transfer</a></li>
     </ul>
 
     <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+        <div id="deposit-trans" class="tab-pane fade in active">
             
         </div>
-        <div id="menu1" class="tab-pane fade">
-            <h3>Menu 1</h3>
-            <p>Some content in menu 1.</p>
+        <div id="withdraw-trans" class="tab-pane fade">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for withdr in withdraw %}
+                    <tr>
+                        <td scope="row"> {{withdr.id}}</th>
+                        <td>{{withdr.withdraw_amount}}</td>
+                        <td>{{withdr.date}}</td>
+        
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
         </div>
-        <div id="menu2" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
+        <div id="transfer-trans" class="tab-pane fade">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trans in transfer %}
+                    <tr>
+                        <td scope="row"> {{trans.id}}</th>
+                        <td>{{trans.amount}}</td>
+                        <td>{{trans.date}}</td>
+        
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
         </div>
     </div>
 
-    {{si}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dep in page.object_list %}
+            <tr>
+                <td scope="row"> {{dep.id}}</th>
+                <td>{{dep.amount}}</td>
+                <td>{{dep.date}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                {% if page.has_previous %}
+                <td>
+                    <a href="{% url 'transaction' %}?page={{ page.previous_page_number }}">Previous Page</a>
+                </td>
+                {% endif %}
+                <td></td>
+                {% if page.has_next %}
+                <td>
+                    <a href="{% url 'transaction' %}?page={{ page.next_page_number }}">Next Page</a>
+                </td>
+                {% endif %}
+            </tr>
 
-    <form action="" method="post">
-        {% csrf_token %}
+        </tbody>
+    </table>
 
-        <h3>HOME</h3>
-        <p>From:</p>
-        <input type="date" name="fromdate" id="">
-        <p>To:</p>
-        <input type="date" name="todate" id="">
-        <input type="submit" value="Submit">
-        <p>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dep in sdata %}
-                <tr>
-                    <td scope="row"> {{dep.id}}</th>
-                    <td>{{dep.amount}}</td>
-                    <td>{{dep.date}}</td>
-
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-
-        </p>
-    </form>
+    
     
 </div>
 
