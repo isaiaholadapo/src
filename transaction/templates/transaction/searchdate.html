@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body {
+        background-color: #281459 !important;
+        color: #fff;
+    }
+
+    a.nav-link {
+        color: black;
+    }
+
+    .h33 {
+        margin-top: 5em;
+        color: #fff;
+    }
+
+    td,
+    th {
+        color: #fff;
+        text-align: center;
+    }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+<div class="container h33">
+    <h4>Account Details:</h4>
+
+
+    <form method="post">
+        {% csrf_token %}
+        From: <input type="date" name="fromdate" id="">
+        To: <input type="date" name="todate" id="">
+        <input type="submit" value="Search">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dep in ssdata %}
+                <tr>
+                    <td scope="row"> {{dep.id}}</th>
+                    <td>{{dep.amount}}</td>
+                    <td>{{dep.date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+
+</div>
+
+{% endblock content %}

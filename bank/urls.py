@@ -32,6 +32,8 @@ from transaction.views import (
     withdraw_view, 
     transfer_view,
     transaction_view,
+    deposit_search_view,
+    withdraw_history_view,
     
 )
 urlpatterns = [
@@ -44,6 +46,8 @@ urlpatterns = [
     path('withdraw/',  withdraw_view, name = 'withdraw'),
     path('transfer/',  transfer_view, name = 'transfer'),
     path('transaction/',  transaction_view, name = 'transaction'),
+    path('dte/', deposit_search_view, name = 'dte'),
+    path('withdraw-history/', withdraw_history_view, name = 'withdraw-history'),
     
 
 ]
