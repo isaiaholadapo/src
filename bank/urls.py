@@ -20,25 +20,34 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from account.views import (
-    
+    home_view,
+    about_view,
+    service_view,
+    contact_view,
     registration_view,
     login_view,
     logout_view,
 )
 
 from transaction.views import (
-    home_view,
+    account_view,
     deposit_view,
     withdraw_view, 
     transfer_view,
     transaction_view,
     deposit_search_view,
     withdraw_history_view,
+    deposit_history_view,
+    transfer_history_view,
     
 )
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('account-details/', home_view, name = 'home'),
+    path('', home_view, name = 'home'),
+    path('about/', about_view, name = 'about'),
+    path('service/', service_view, name = 'service'),
+    path('contact/', contact_view, name = 'contact'),
+    path('account-details/', account_view, name = 'account-details'),
     path('register/', registration_view, name = 'register'),
     path('login/', login_view, name = 'login'),
     path('logout/',  logout_view, name = 'logout'),
@@ -48,6 +57,8 @@ urlpatterns = [
     path('transaction/',  transaction_view, name = 'transaction'),
     path('dte/', deposit_search_view, name = 'dte'),
     path('withdraw-history/', withdraw_history_view, name = 'withdraw-history'),
+    path('deposit-history/', deposit_history_view, name = 'deposit-history'),
+    path('transfer-history/', transfer_history_view, name = 'transfer-history'),
     
 
 ]

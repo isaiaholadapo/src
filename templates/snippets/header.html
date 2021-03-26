@@ -42,10 +42,7 @@ Author URL: http://w3layouts.com
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'transaction' %}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'home' %}">Account <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'account-details' %}">Account <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'deposit' %}">Deposit <span class="sr-only">(current)</span></a>
@@ -57,6 +54,9 @@ Author URL: http://w3layouts.com
                         <a class="nav-link" href="{% url 'transfer' %}">Transfer<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
+                        <a class="nav-link" href="#">Transaction History<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
                     </li>
                     {% else %}
@@ -65,10 +65,10 @@ Author URL: http://w3layouts.com
                         <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item @@about__active">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="{% url 'about' %">About</a>
                     </li>
                     <li class="nav-item @@services__active">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="{% url 'service' %">Services</a>
                     </li>
                     <li class="nav-item @@contact__register">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
@@ -77,7 +77,7 @@ Author URL: http://w3layouts.com
                         <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
                     <li class="nav-item @@contact__active">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
                     
                     <!--/search-right-->

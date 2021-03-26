@@ -47,15 +47,15 @@ form {
 </style>
 <div class="h33">
     <div class="container">
-        <h4>Withdraw History:</h4>
+        <h4>deposit History:</h4>
     
         {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-success" role="alert">
-        {{ message }}
-      </div>
-      {% endfor %}
-      {% endif %}
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
         <form  method="post">
             {% csrf_token %}
             From: <input type="date" name="fromdate" id="">
@@ -71,23 +71,23 @@ form {
                 </tr>
             </thead>
             <tbody>
-                {% for withdraw in page.object_list %}
+                {% for deposit in page.object_list %}
                 <tr>
-                    <td scope="row"> {{withdraw.id}}</th>
-                    <td>{{withdraw.withdraw_amount}}</td>
-                    <td>{{withdraw.date}}</td>
+                    <td scope="row"> {{deposit.id}}</th>
+                    <td>{{deposit.amount}}</td>
+                    <td>{{deposit.date}}</td>
                 </tr>
                 {% endfor %}
                 <tr>
                     {% if page.has_previous %}
                     <td>
-                        <a href="{% url 'withdraw-history' %}?page={{ page.previous_page_number }}">Previous Page</a>
+                        <a href="{% url 'deposit-history' %}?page={{ page.previous_page_number }}">Previous Page</a>
                     </td>
                     {% endif %}
                     <td></td>
                     {% if page.has_next %}
                     <td>
-                        <a href="{% url 'withdraw-history' %}?page={{ page.next_page_number }}">Next Page</a>
+                        <a href="{% url 'deposit-history' %}?page={{ page.next_page_number }}">Next Page</a>
                     </td>
                     {% endif %}
                 </tr>

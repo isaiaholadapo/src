@@ -17,7 +17,7 @@ def randomNum():
     return int(random.uniform(1000000000, 9999999999))
 
 
-def home_view(request):
+def account_view(request):
     user = request.user
     if user.is_authenticated:
         try:
@@ -55,8 +55,8 @@ def deposit_view(request):
 
                 actii_user.save()
                 # temp.delete()
-
-                return redirect('home')
+                messages.success(request, "deposited successfully")
+                return redirect('deposit-history')
         else:
             form = forms.DepositForm()
     else:
@@ -93,6 +93,7 @@ def withdraw_view(request):
                 elif wbal > withdrawal_amount:
                     withdrawal_user.balance = withdrawal_user.balance - withdrawal_amount
                     withdrawal_user.save()
+                    messages.success(request, "Withdrawal successful")
                     return redirect('withdraw-history')
                 else:
                     temp.delete()
@@ -129,7 +130,8 @@ def transfer_view(request):
 
                     sender.save()
                     receiver_account.save()
-                    return redirect('home')
+                    messages.success(request, "Transaction successful")
+                    return redirect('transfer-history')
                 else:
                     temp.delete()
 
@@ -190,6 +192,67 @@ def withdraw_history_view(request):
             'count': withdraw_paginator.count,
         }
         return render(request, 'transaction/withdraw_history.html', contexti)
+
+def deposit_history_view(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('login')
+    if request.method == "POST":
+        fromdate = request.POST.get('fromdate')
+        todate = request.POST.get('todate')
+        searchresult = Deposit.objects.raw('select id,amount,date from transaction_deposit where date between "'+fromdate+'" and "'+todate+'"')
+        searchresult_paginator = Paginator(searchresult, 5)
+        page_num = request.GET.get('page')
+        page = searchresult_paginator.get_page(page_num)
+        context = {
+            "searchresult" : searchresult,
+            "page": page,
+            "count": searchresult_paginator.count,
+        }
+        return render(request, 'transaction/deposit_history.html', context)
+    else:
+        deposit = Deposit.objects.all().order_by('date').reverse()
+        deposit_paginator = Paginator(deposit, 5)
+        page_num = request.GET.get('page')
+        page = deposit_paginator.get_page(page_num)
+        context = {
+            "deposit" : deposit,
+            "page": page,
+            "count": deposit_paginator.count,
+        }
+        return render(request, 'transaction/deposit_history.html', context)
+
+def transfer_history_view(request):
+    user =  request.user
+    if not user.is_authenticated:
+        return redirect('login')
+    if request.method == "POST":
+        fromdate = request.POST.get("fromdate")
+        todate = request.POST.get("todate")
+        searchresult = Transfer.objects.raw('select id,amount,date from transaction_transfer where date between "'+fromdate+'" and "'+todate+'"')
+        transfer_paginator = Paginator(searchresult, 5)
+        page_num = request.GET.get('page')
+        page = transfer_paginator.get_page(page_num)
+        context = {
+            "searchresult": searchresult,
+            "page" : page,
+            "count": transfer_paginator.count,
+        }
+        return render(request, 'transaction/transfer_history.html', context)
+    else:
+        transfer = Transfer.objects.all().order_by('date').reverse()
+        transfer_paginator = Paginator(transfer, 5)
+        page_num = request.GET.get('page')
+        page = transfer_paginator.get_page(page_num)
+        context = {
+            "transfer": transfer,
+            "page" : page,
+            "count": transfer.count,
+        }
+
+        return render(request, 'transaction/transfer_history.html', context)
+
+
 
 def deposit_search_view(request):
     if request.method == "POST":
