@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -59,6 +59,10 @@ urlpatterns = [
     path('withdraw-history/', withdraw_history_view, name = 'withdraw-history'),
     path('deposit-history/', deposit_history_view, name = 'deposit-history'),
     path('transfer-history/', transfer_history_view, name = 'transfer-history'),
+
+
+    #restframework urls
+    path('api/account/', include('account.api.urls', 'account_api')),
     
 
 ]

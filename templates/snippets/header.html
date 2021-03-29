@@ -50,9 +50,16 @@ Author URL: http://w3layouts.com
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'withdraw' %}">Withdraw<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'transfer' %}">Transfer<span class="sr-only">(current)</span></a>
-                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Transfer
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item " href="{% url 'deposit-history' %}">Deposit<span class="sr-only">(current)</span></a>
+                          <a class="dropdown-item " href="{% url 'transfer-history' %}">Transfer<span class="sr-only">(current)</span></a>
+                          <a class="dropdown-item " href="{% url 'withdraw-history' %}">Withdraw<span class="sr-only">(current)</span></a>
+                        </div>
+                      </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Transaction History<span class="sr-only">(current)</span></a>
                     </li>
