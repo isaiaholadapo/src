@@ -9,6 +9,7 @@ from transaction.models import Deposit, AccountDetail, Withdraw, Transfer
 from transaction.forms import DepositForm, WithdrawForm, TransferForm
 from transaction import forms
 from . import models
+from account.models import Account
 
 # Create your views here.
 
@@ -21,13 +22,14 @@ def account_view(request):
     user = request.user
     if user.is_authenticated:
         try:
-            active_user = AccountDetail.objects.get(user_name=user)
+            active_user = AccountDetail.objects.get(email=user)
         except:
+            my_field = Account._meta.get_field('email')
             active_user = AccountDetail()
             active_user.account_number = randomNum()
             active_user.account_type = 'savings'
             active_user.balance = 0
-            active_user.user_name = request.user
+            active_user.email = request.user
             active_user.save()
     else:
         return redirect('login')
@@ -43,9 +45,9 @@ def deposit_view(request):
             if form.is_valid():
                 form.save()
                 actii_user = models.AccountDetail.objects.get(
-                    user_name=request.user)
+                    email=request.user)
                 acti_user = models.Deposit.objects.filter(
-                    dep_user_name=request.user).last()
+                    email=request.user).last()
                 depositor_account_number = acti_user.dep_account
                 temp = acti_user
 
@@ -73,12 +75,12 @@ def withdraw_view(request):
             if form.is_valid():
                 form.save()
                 withdrawal_user = models.Withdraw.objects.filter(
-                    withdraw_username=request.user).last()
+                    email=request.user).last()
                 withdrawal_account = withdrawal_user.withdraw_account
                 withdrawal_amount = withdrawal_user.withdraw_amount
                 temp = withdrawal_user
                 withdrawal_user = models.AccountDetail.objects.get(
-                    user_name=request.user)
+                    email=request.user)
                 wbal = withdrawal_user.balance
                 if withdrawal_amount < 5000:
                     temp.delete()
@@ -115,7 +117,7 @@ def transfer_view(request):
             if form.is_valid():
                 form.save()
                 sender = models.Transfer.objects.filter(
-                    sender_username=request.user).last()
+                    email=request.user).last()
                 receiver_account_no = sender.receiver_account
                 transfer_amount = sender.amount
                 temp = sender
@@ -123,7 +125,7 @@ def transfer_view(request):
                 receiver_account = models.AccountDetail.objects.get(
                     account_number=receiver_account_no)
                 sender = models.AccountDetail.objects.get(
-                    user_name=request.user)
+                    email=request.user)
                 if sender.balance > transfer_amount:
                     sender.balance = sender.balance - transfer_amount
                     receiver_account.balance = receiver_account.balance + transfer_amount
@@ -268,7 +270,7 @@ def interest_view(self):
     user = request.user
     if not user.is_authenticated:
         return redirect('login')
-    int_user = models.AccountDetail.objects.get(user_name = request.user)
+    int_user = models.AccountDetail.objects.get(email = request.user)
     int_user.balance = int_user.balance * (1/ 0.01)
     int_user.save()
     return render(request, 'transaction/home.html', {"int_user": int_user})

@@ -45,12 +45,12 @@ class Account(AbstractBaseUser):
 
 
 	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = ['username']
+	#REQUIRED_FIELDS = ['username']
 
 	objects = MyAccountManager()
 
 	def __str__(self):
-		return self.username
+		return self.email
 
 	# For checking permissions. to keep it simple all admin have ALL permissons
 	def has_perm(self, perm, obj=None):
