@@ -9,14 +9,15 @@ from account.forms import RegistrationForm, AccountAuthenticationForm
 def home_view(request):
     return render(request, 'account\home.html')
 
-def about_view(request):
-    return render(request, 'account\about.html')
-
 def service_view(request):
-    return render(request, 'account\service.html')
+    return render(request, 'account\services.html')
 
 def contact_view(request):
     return render(request, 'account\contact.html')
+
+def about_view(request):
+    return render(request, 'account\know.html')
+
 
 def registration_view(request):
     context = {}
