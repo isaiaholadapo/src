@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-    body {
-        background-color: #281459 !important;
-        color: #fff;
-    }
-
     a.nav-link {
         color: black;
     }
@@ -20,7 +15,18 @@
         color: #fff;
     }
 </style>
-<div class="container h33">
+
+<div class="inner-banner">
+</div>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Interest</li>
+        </ul>
+    </div>
+</section>
+<div class="container">
     <h4>Account Details:</h4>
 
     {{interest}}

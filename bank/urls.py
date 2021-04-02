@@ -20,8 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from account.views import (
-    home_view,
     about_view,
+    home_view,
     service_view,
     contact_view,
     registration_view,

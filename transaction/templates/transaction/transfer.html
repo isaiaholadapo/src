@@ -2,16 +2,6 @@
 
 {% block content %}
 <style>
-  body {
-    background-color: #281459;
-    color: #fff;
-  }
-
-  .h3 {
-    margin-top: 3em;
-    color: #fff;
-  }
-
   .form-signin {
     width: 100%;
     max-width: 330px;
@@ -48,6 +38,16 @@
     border-top-right-radius: 0;
   }
 </style>
+<div class="inner-banner">
+</div>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Transfer</li>
+        </ul>
+    </div>
+</section>
 <div class="container">
   <div class="text-center">
     {{ active_user.account_number}}
