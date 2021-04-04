@@ -7,16 +7,16 @@ from account.forms import RegistrationForm, AccountAuthenticationForm
 # Create your views here.
 
 def home_view(request):
-    return render(request, 'account\home.html')
+    return render(request, 'account/home.html')
 
 def about_view(request):
-    return render(request, 'account\about.html')
+    return render(request, 'account/about.html')
 
 def service_view(request):
-    return render(request, 'account\service.html')
+    return render(request, 'account/service.html')
 
 def contact_view(request):
-    return render(request, 'account\contact.html')
+    return render(request, 'account/contact.html')
 
 def registration_view(request):
     context = {}

@@ -1,55 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<style>
-    body {
-        background-color: #281459 !important;
-        color: #fff;
-    }
 
-
-    a.nav-link {
-        color: black;
-    }
-
-    .h33 {
-        margin-top: 7em !important;
-        color: #fff;
-    }
-
-    td,
-    th {
-        color: #fff;
-        text-align: center;
-    }
-    a {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .fixed-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-    background-color: #281459;
-    color: #fff;
-}
-
-h4 {
-    color: #fff;
-    margin-bottom: 1em;
-}
-
-form { 
-    margin: 1em;
-}
-</style>
-<div class="h33">
+<div>
     <div class="container">
         <h4>Account Details:</h4>
-    
-    
         <form  method="post">
             {% csrf_token %}
             From: <input type="date" name="fromdate" id="">
