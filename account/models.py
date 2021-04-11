@@ -13,6 +13,20 @@ account_choices = (
 	('dom', 'DOM'),
 
 )
+
+gender = (
+    ('female', 'FEMALE'),
+    ('male', 'male'),
+
+)
+
+employment_status = (
+    ('employed', 'EMPLOYED'),
+    ('self employed', 'SELF EMPLOYED'),
+	('freelance', "FREELANCE"),
+	('unemployed', 'UNEMPLOYED'),
+
+)
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email,  password=None):
 		if not email:
@@ -46,14 +60,23 @@ class Account(AbstractBaseUser):
 	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	first_name 				= models.CharField(max_length=255)
 	last_name 				= models.CharField(max_length=255)
+	gender					= models.CharField(max_length=15, choices=gender)
+	date_of_birth			= models.DateTimeField(null = True, blank = True)
 	phone_number 			= models.CharField(max_length=255)
 	address		 			= models.CharField(max_length=255)
-	address22	 			= models.CharField(max_length=255)
-	city		 			= models.CharField(max_length=255)
 	state		 			= models.CharField(max_length=255)
-	postal_code	 			= models.CharField(max_length=255)
 	bvn			 			= models.CharField(max_length=255)
 	account_type 			= models.CharField(max_length=15, choices = account_choices, default = 'savings')
+	employment_status		= models.CharField(max_length=25, choices = employment_status)
+	employer				= models.CharField(max_length=255)
+	employer_number			= models.IntegerField(null = True, blank = True)
+	employer_email			= models.EmailField(max_length = 60)
+	employer_address		= models.CharField(max_length=255)
+	employer_location		= models.CharField(max_length = 255)
+	kin_first_name			= models.CharField(max_length = 255)
+	kin_last_name			= models.CharField(max_length=255)
+	kin_phone				= models.IntegerField(null = True, blank = True)
+	kin_email				= models.EmailField(max_length = 100)
 	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
 	last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
 	is_admin				= models.BooleanField(default=False)
@@ -64,6 +87,7 @@ class Account(AbstractBaseUser):
 
 	USERNAME_FIELD = 'email'
 	#REQUIRED_FIELDS = ['username']
+
 
 	objects = MyAccountManager()
 
