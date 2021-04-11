@@ -1,46 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
-    .form-signin {
-        width: 100%;
-        padding: 15px;
-        margin: auto;
-    }
-
-    .form-signin .checkbox {
-        font-weight: 400;
-    }
-
-    .form-signin .form-control {
-        position: relative;
-        box-sizing: border-box;
-        height: auto;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    .form-signin .form-control:focus {
-        z-index: 2;
-    }
-
-    .form-signin input[type="email"] {
-        margin-bottom: 10px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type="text"] {
-        margin-bottom: 10px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+    body {
+        background-color: #2a2759;
     }
 </style>
 <div class="inner-banner">
@@ -53,115 +17,444 @@
         </ul>
     </div>
 </section>
-<form class="form-signin" method="POST">
+ <section class="register-section">
+     <form class="form-register" method="POST" role="form">
     {% csrf_token %}
     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
     <div class="container py-5">
-        <div class="row">
-            <div class="col-md-10 mx-auto">
-                <form>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputFirstname">First name</label>
-                            <input type="text" class="form-control" id="inputFirstname" name="first_name"
-                                placeholder="First name">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="inputLastname">Last name</label>
-                            <input type="text" class="form-control" id="inputLastname" name="last_name"
-                                placeholder="Last name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputPhone">Phone Number</label>
-                            <input type="number" class="form-control" id="inputPhone" name="phone_number"
-                                placeholder="Phone Number">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email"
-                                placeholder="Email Address">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password1"
-                                placeholder="Password">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="inputPassword2">Confirm Password</label>
-                            <input type="password" class="form-control" id="inputPassword2" name="password2"
-                                placeholder="Confirm Password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputAddressLine1">Address</label>
-                            <input type="text" class="form-control" id="inputAddressLine1" name="address"
-                                placeholder="Street Address">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="inputAddressLine2">Address (Line 2)</label>
-                            <input type="text" class="form-control" id="inputAddressLine2" name="address2"
-                                placeholder="Line 2">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" name="city" placeholder="City">
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="inputState">State</label>
-                            <input type="text" class="form-control" id="inputState" name="state" placeholder="State">
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="inputPostalCode">Postal Code</label>
-                            <input type="text" class="form-control" id="inputPostalCode" name="post_code"
-                                placeholder="Postal Code">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputBvn">BVN</label>
-                            <input type="number" class="form-control" name="bvn" id="inputBvn" placeholder="BVN">
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Account Type</label>
-                                <select class="form-control" name="account_type" id="exampleFormControlSelect1">
-                                    <option>Click here to select account type</option>
-                                    <option>savings</option>
-                                    <option>current</option>
-                                    <option>deposit Account</option>
-                                    <option>dom Account</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    {% for field in registration_form %}
-                    {% for error in field.errors %}
-                    <p style="color:red;">{{error}}</p>
-                    {% endfor %}
-                    {% endfor %}
-                
-                    {% if registration_form.non_field_errors %}
-                    <div style="color: red;">
-                        <p>{{register_form.non_field_errors}}</p>
-                    </div>
-                    {% endif %}
-                    <button type="submit" class="btn btn-primary px-4 float-right">Register</button>
-                </form>
+    <div class="col-md-10 mx-auto">
+        <div class="form-register">
+            <div class="form-register-header">
+              <p>Fill all form field to go next step</p>
+              <ul class="list-unstyled form-register-steps clearfix">
+                <li class="active"><span>1</span></li>
+                <li><span>2</span></li>
+                <li><span>3</span></li>
+                <li><span>4</span></li>
+              </ul>
             </div>
+            <fieldset class="register-fieldset show">
+              <h5>Personal Information</h5>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="first_name" id="fname">
+                  <label for="fname" class="register-form-text-label">First Name*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="last_name" id="lname">
+                  <label for="lname" class="register-form-text-label">Last Name*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <label for="exampleFormControlSelect1" class="register-form-text-label"></label>
+                  <select class="form-control register-required" name="gender"  id="exampleFormControlSelect1">
+                    <option>Click here to select gender</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                  </select>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="dob" id="dob">
+                  <label for="dob" class="register-form-text-label">Date of Birth*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="number" class="form-control register-required" name="phone_number" id="phone">
+                  <label for="phone" class="register-form-text-label">Phone Number*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="email" class="form-control register-required" name="email" id="email">
+                  <label for="email" class="register-form-text-label">Email Address*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="password" class="form-control register-required" name="password1" id="password1">
+                  <label for="password1" class="register-form-text-label">Password*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="password" class="form-control register-required" name="password2" id="password2">
+                  <label for="password2" class="register-form-text-label">Confirm Password*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="address" id="inputAddressLine1">
+                  <label for="inputAddressLine1" class="register-form-text-label">Address*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="state" id="inputState">
+                  <label for="inputState" class="register-form-text-label">State*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="number" class="form-control register-required" name="bvn" id="inputBvn">
+                  <label for="inputBvn" class="register-form-text-label">BVN*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="exampleFormControlSelect2" class="register-form-text-label"></label>
+                  <select class="form-control register-required" name="account_type" id="exampleFormControlSelect2">
+                    <option>Click here to select account type</option>
+                    <option>savings</option>
+                    <option>current</option>
+                    <option>deposit Account</option>
+                    <option>dom Account</option>
+                  </select>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group clearfix">
+                <a href="javascript:;" class="form-register-next-btn float-right">Next</a>
+              </div>
+            </fieldset>
+            <fieldset class="register-fieldset">
+              <h5>Work Details</h5>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <label for="exampleFormControlSelect3" class="register-form-text-label"></label>
+                  <select class="form-control register-required" name="emplyment_status"  id="exampleFormControlSelect3">
+                    <option>Click here to select employment status</option>
+                    <option>Employed</option>
+                    <option>Self Employed</option>
+                    <option >Freelance</option>
+                    <option >Unemploy</option>
+                  </select>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="employer" id="employer">
+                  <label for="employer" class="register-form-text-label">Company name*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="number" class="form-control register-required" name="employer_number" id="employer_no">
+                  <label for="employer_no" class="register-form-text-label">Company phone number*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="employer_email" id="employer_email">
+                  <label for="employer_email" class="register-form-text-label">Company email address*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="number" class="form-control register-required" name="employer_address" id="employer_address">
+                  <label for="employer_address" class="register-form-text-label">Company address*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="employer_location" id="employer_location">
+                  <label for="employer_email" class="register-form-text-label">State*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-group clearfix">
+                <a href="javascript:;" class="form-register-previous-btn float-left">Previous</a>
+                <a href="javascript:;" class="form-register-next-btn float-right">Next</a>
+              </div>
+            </fieldset>
+            <fieldset class="register-fieldset">
+              <h5>Next of Kin</h5>
+              <div class="form-group row">
+                <div class="col-sm-6">
+                <input type="text" class="form-control register-required" name="kin_first_name" id="kname">
+                <label for="kname" class="register-form-text-label">First Name*</label>
+                  <div class="register-form-error"></div>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control register-required" name="employer_location" id="employer_location">
+                  <label for="employer_email" class="register-form-text-label">State*</label>
+                  <div class="register-form-error"></div>
+                </div>
+              </div>
+              <div class="form-group">
+
+                <div class="register-form-error"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control register-required" id="krname">
+                <label for="krname" class="register-form-text-label">Last Name*</label>
+                <div class="register-form-error"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control register-required" name="kin_phone" id="kin_phone">
+                <label for="kin_phone" class="register-form-text-label">Phone Number*</label>
+                <div class="register-form-error"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control register-required" name="kin_email" id="kemail">
+                <label for="kin_email" class="register-form-text-label">Email Address*</label>
+                <div class="register-form-error"></div>
+              </div>
+              <div class="form-group clearfix">
+                <a href="javascript:;" class="form-register-previous-btn float-left">Previous</a>
+                <a href="javascript:;" class="form-register-next-btn float-right">Next</a>
+              </div>
+            </fieldset>
+            <fieldset class="register-fieldset">
+              <h5>Payment Information</h5>
+              <div class="form-group">
+                Payment Type
+                <div class="register-form-radio">
+                  <input name="radio-name" id="mastercard" type="radio">
+                  <label for="mastercard">Master Card</label>
+                </div>
+                <div class="register-form-radio">
+                  <input name="radio-name" id="visacard" type="radio">
+                  <label for="visacard">Visa Card</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control register-required" id="honame">
+                <label for="honame" class="register-form-text-label">Holder Name*</label>
+                <div class="register-form-error"></div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control register-required" id="cardname">
+                    <label for="cardname" class="register-form-text-label">Card Number*</label>
+                    <div class="register-form-error"></div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control register-required" id="cvc">
+                    <label for="cvc" class="register-form-text-label">CVC*</label>
+                    <div class="register-form-error"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">Expiry Date</div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option value="">Date</option>
+                      <option value="">1</option>
+                      <option value="">2</option>
+                      <option value="">3</option>
+                      <option value="">4</option>
+                      <option value="">5</option>
+                      <option value="">6</option>
+                      <option value="">7</option>
+                      <option value="">8</option>
+                      <option value="">9</option>
+                      <option value="">10</option>
+                      <option value="">11</option>
+                      <option value="">12</option>
+                      <option value="">13</option>
+                      <option value="">14</option>
+                      <option value="">15</option>
+                      <option value="">16</option>
+                      <option value="">17</option>
+                      <option value="">18</option>
+                      <option value="">19</option>
+                      <option value="">20</option>
+                      <option value="">21</option>
+                      <option value="">22</option>
+                      <option value="">23</option>
+                      <option value="">24</option>
+                      <option value="">25</option>
+                      <option value="">26</option>
+                      <option value="">27</option>
+                      <option value="">28</option>
+                      <option value="">29</option>
+                      <option value="">30</option>
+                      <option value="">31</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option value="">Month</option>
+                      <option value="">jan</option>
+                      <option value="">Feb</option>
+                      <option value="">March</option>
+                      <option value="">April</option>
+                      <option value="">May</option>
+                      <option value="">June</option>
+                      <option value="">Jully</option>
+                      <option value="">August</option>
+                      <option value="">Sept</option>
+                      <option value="">Oct</option>
+                      <option value="">Nov</option>
+                      <option value="">Dec</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option value="">Years</option>
+                      <option value="">2019</option>
+                      <option value="">2020</option>
+                      <option value="">2021</option>
+                      <option value="">2022</option>
+                      <option value="">2023</option>
+                      <option value="">2024</option>
+                      <option value="">2025</option>
+                      <option value="">2026</option>
+                      <option value="">2027</option>
+                      <option value="">2028</option>
+                      <option value="">2029</option>
+                      <option value="">2030</option>
+                      <option value="">2031</option>
+                      <option value="">2032</option>
+                      <option value="">2033</option>
+                      <option value="">2034</option>
+                      <option value="">2035</option>
+                      <option value="">2036</option>
+                      <option value="">2037</option>
+                      <option value="">2038</option>
+                      <option value="">2039</option>
+                      <option value="">2040</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <a href="javascript:;" class="form-register-previous-btn float-left">Previous</a>
+
+                  <button type="submit" class="btn form-register-submit float-right">Submit</button>
+              </div>
+            </fieldset>
+
         </div>
+      </div>
     </div>
 
+    </form>
+ </section>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  
+<script>
+    jQuery(document).ready(function () {
+      // click on next button
+      jQuery('.form-register-next-btn').click(function () {
+        var parentFieldset = jQuery(this).parents('.register-fieldset');
+        var currentActiveStep = jQuery(this).parents('.form-register').find('.form-register-steps .active');
+        var next = jQuery(this);
+        var nextregisterStep = true;
+        parentFieldset.find('.register-required').each(function () {
+          var thisValue = jQuery(this).val();
 
-</form>
+          if (thisValue == "") {
+            jQuery(this).siblings(".register-form-error").slideDown();
+            nextregisterStep = false;
+          }
+          else {
+            jQuery(this).siblings(".register-form-error").slideUp();
+          }
+        });
+        if (nextregisterStep) {
+          next.parents('.register-fieldset').removeClass("show", "400");
+          currentActiveStep.removeClass('active').addClass('activated').next().addClass('active', "400");
+          next.parents('.register-fieldset').next('.register-fieldset').addClass("show", "400");
+          jQuery(document).find('.register-fieldset').each(function () {
+            if (jQuery(this).hasClass('show')) {
+              var formAtrr = jQuery(this).attr('data-tab-content');
+              jQuery(document).find('.form-register-steps .form-register-step-item').each(function () {
+                if (jQuery(this).attr('data-attr') == formAtrr) {
+                  jQuery(this).addClass('active');
+                  var innerWidth = jQuery(this).innerWidth();
+                  var position = jQuery(this).position();
+                  jQuery(document).find('.form-register-step-move').css({ "left": position.left, "width": innerWidth });
+                } else {
+                  jQuery(this).removeClass('active');
+                }
+              });
+            }
+          });
+        }
+      });
+      //click on previous button
+      jQuery('.form-register-previous-btn').click(function () {
+        var counter = parseInt(jQuery(".register-counter").text());;
+        var prev = jQuery(this);
+        var currentActiveStep = jQuery(this).parents('.form-register').find('.form-register-steps .active');
+        prev.parents('.register-fieldset').removeClass("show", "400");
+        prev.parents('.register-fieldset').prev('.register-fieldset').addClass("show", "400");
+        currentActiveStep.removeClass('active').prev().removeClass('activated').addClass('active', "400");
+        jQuery(document).find('.register-fieldset').each(function () {
+          if (jQuery(this).hasClass('show')) {
+            var formAtrr = jQuery(this).attr('data-tab-content');
+            jQuery(document).find('.form-register-steps .form-register-step-item').each(function () {
+              if (jQuery(this).attr('data-attr') == formAtrr) {
+                jQuery(this).addClass('active');
+                var innerWidth = jQuery(this).innerWidth();
+                var position = jQuery(this).position();
+                jQuery(document).find('.form-register-step-move').css({ "left": position.left, "width": innerWidth });
+              } else {
+                jQuery(this).removeClass('active');
+              }
+            });
+          }
+        });
+      });
+      //click on form submit button
+      jQuery(document).on("click", ".form-register .form-register-submit", function () {
+        var parentFieldset = jQuery(this).parents('.register-fieldset');
+        var currentActiveStep = jQuery(this).parents('.form-register').find('.form-register-steps .active');
+        parentFieldset.find('.register-required').each(function () {
+          var thisValue = jQuery(this).val();
+          if (thisValue == "") {
+            jQuery(this).siblings(".register-form-error").slideDown();
+          }
+          else {
+            jQuery(this).siblings(".register-form-error").slideUp();
+          }
+        });
+      });
+      // focus on input field check empty or not
+      jQuery(".form-control").on('focus', function () {
+        var tmpThis = jQuery(this).val();
+        if (tmpThis == '') {
+          jQuery(this).parent().addClass("focus-input");
+        }
+        else if (tmpThis != '') {
+          jQuery(this).parent().addClass("focus-input");
+        }
+      }).on('blur', function () {
+        var tmpThis = jQuery(this).val();
+        if (tmpThis == '') {
+          jQuery(this).parent().removeClass("focus-input");
+          jQuery(this).siblings('.register-form-error').slideDown("3000");
+        }
+        else if (tmpThis != '') {
+          jQuery(this).parent().addClass("focus-input");
+          jQuery(this).siblings('.register-form-error').slideUp("3000");
+        }
+      });
+    });
+
+  </script>
+
 
 {% endblock content %}

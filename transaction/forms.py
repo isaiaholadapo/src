@@ -6,7 +6,7 @@ from transaction.models import Deposit
 class DepositForm(forms.ModelForm):
     class Meta:
         model = models.Deposit
-        fields = [ 'amount', 'email', 'dep_account']
+        fields = [ 'amount', 'dep_email', 'dep_account']
 
 class WithdrawForm(forms.ModelForm):
     class Meta:
